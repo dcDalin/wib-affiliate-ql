@@ -1,5 +1,6 @@
 import express from 'express';
 import { ApolloServer } from 'apollo-server-express';
+import mongoose from 'mongoose';
 import config from './config';
 import typeDefs from './graphql/typeDefs';
 import resolvers from './graphql/resolvers';
@@ -22,6 +23,8 @@ const PORT = process.env.PORT || ENV_VAR.APP_PORT;
       playground: true,
     });
     server.applyMiddleware({ app });
+
+    await mongoose.connect(ENV_VAR.MONGO_URL, { useNewUrlParser: true });
 
     // eslint-disable-next-line no-console
     app.listen({ port: PORT }, () => console.log(`🚀 Server ready at http://localhost:${PORT}${server.graphqlPath}`));
