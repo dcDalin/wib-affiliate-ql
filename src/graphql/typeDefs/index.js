@@ -1,9 +1,4 @@
-import { gql } from 'apollo-server-express';
+import root from './root';
+import user from './user';
 
-const typeDefs = gql`
-  type Query {
-    hello: String
-  }
-`;
-
-export default typeDefs;
+export default [root, user];
