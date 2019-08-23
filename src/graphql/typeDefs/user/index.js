@@ -5,11 +5,15 @@ export default gql`
     users: [User]
   }
 
+  extend type Mutation {
+    userSignUp(userSignUpInput: UserSignUpInput): User!
+  }
+
   type User {
     id: ID!
     username: String!
     email: Email!
-    phone: Phone!
+    phone: Phone
     token: String
   }
 
@@ -19,7 +23,14 @@ export default gql`
   }
 
   type Phone {
-    phoneNumber: String!
+    phoneNumber: String
     isVerified: Boolean
+  }
+
+  input UserSignUpInput {
+    username: String!
+    emailAddress: String!
+    password: String!
+    confirmPassword: String!
   }
 `;

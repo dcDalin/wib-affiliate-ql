@@ -2,9 +2,17 @@ import { Schema, model } from 'mongoose';
 
 const userSchema = new Schema(
   {
-    username: String,
+    username: {
+      type: String,
+      required: true,
+      unique: true,
+    },
     email: {
-      emailAddress: String,
+      emailAddress: {
+        type: String,
+        required: true,
+        unique: true,
+      },
       isVerified: { type: Boolean, default: false },
     },
     phone: {
@@ -15,6 +23,9 @@ const userSchema = new Schema(
   },
   {
     timestamps: true,
+  },
+  {
+    strict: true,
   },
 );
 
