@@ -2,8 +2,8 @@
 /* eslint-disable no-underscore-dangle */
 import { UserInputError } from 'apollo-server-express';
 import bcrypt from 'bcryptjs';
-import User from '../../../models/user';
-import { generateToken } from '../utils/generateToken';
+import User from '../../../../models/user';
+import { generateToken } from '../../utils/generateToken';
 
 export default {
   Mutation: {

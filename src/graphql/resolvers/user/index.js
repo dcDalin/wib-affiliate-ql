@@ -1,11 +1,11 @@
 import users from './users';
-import userSignUp from './userSignUp';
+import * as Auth from './auth';
 
 export default {
   Query: {
     ...users.Query,
   },
   Mutation: {
-    ...userSignUp.Mutation,
+    ...Auth.userSignUp.Mutation,
   },
 };
