@@ -20,6 +20,12 @@ const userSchema = new Schema(
       isVerified: { type: Boolean, default: false },
     },
     password: String,
+    social: {
+      googleProvider: {
+        id: String,
+        token: String,
+      },
+    },
   },
   {
     timestamps: true,
@@ -28,5 +34,29 @@ const userSchema = new Schema(
     strict: true,
   },
 );
+
+userSchema.statics.upsertGoogleUser = async function genGoogleTok({ accessToken, profile }) {
+  const User = this;
+
+  const user = await User.findOne({ 'social.googleProvider.id': profile.id });
+
+  // no user was found, lets create a new one
+  if (!user) {
+    const newUser = await User.create({
+      username: profile.displayName || `${profile.familyName} ${profile.givenName}`,
+      email: {
+        emailAddress: profile.emails[0].value,
+        isVerified: true,
+      },
+      'social.googleProvider': {
+        id: profile.id,
+        token: accessToken,
+      },
+    });
+
+    return newUser;
+  }
+  return user;
+};
 
 export default model('User', userSchema);

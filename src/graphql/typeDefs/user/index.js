@@ -7,6 +7,7 @@ export default gql`
 
   extend type Mutation {
     userSignUp(userSignUpInput: UserSignUpInput): User!
+    authGoogle(input: AuthInput!): AuthResponse
   }
 
   type User {
@@ -27,10 +28,19 @@ export default gql`
     isVerified: Boolean
   }
 
+  type AuthResponse {
+    token: String
+    name: String
+  }
+
   input UserSignUpInput {
     username: String!
     emailAddress: String!
     password: String!
     confirmPassword: String!
+  }
+
+  input AuthInput {
+    accessToken: String!
   }
 `;
