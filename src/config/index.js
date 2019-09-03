@@ -2,7 +2,7 @@ const config = {
   production: {
     APP_PORT: process.env.APP_PORT,
     APP_SECRET: process.env.APP_SECRET,
-    MONGO_URL: '',
+    MONGODB_URI: process.env.MONGODB_URI,
     PLAYGROUND: true,
     GOOGLE_CLIENT_ID: process.env.GOOGLE_CLIENT_ID,
     GOOGLE_CLIENT_SECRET: process.env.GOOGLE_CLIENT_SECRET,
@@ -10,7 +10,7 @@ const config = {
   staging: {
     APP_PORT: process.env.APP_PORT,
     APP_SECRET: process.env.APP_SECRET,
-    MONGO_URL: '',
+    MONGODB_URI: process.env.MONGODB_URI,
     PLAYGROUND: true,
     GOOGLE_CLIENT_ID: process.env.GOOGLE_CLIENT_ID,
     GOOGLE_CLIENT_SECRET: process.env.GOOGLE_CLIENT_SECRET,
@@ -18,7 +18,7 @@ const config = {
   development: {
     APP_PORT: process.env.APP_PORT,
     APP_SECRET: process.env.APP_SECRET,
-    MONGO_URL: 'mongodb://localhost/tour',
+    MONGODB_URI: 'mongodb://localhost/tour',
     PLAYGROUND: true,
     GOOGLE_CLIENT_ID: process.env.GOOGLE_CLIENT_ID,
     GOOGLE_CLIENT_SECRET: process.env.GOOGLE_CLIENT_SECRET,
@@ -26,7 +26,7 @@ const config = {
   testing: {
     APP_PORT: process.env.APP_PORT,
     APP_SECRET: process.env.APP_SECRET,
-    MONGO_URL: '',
+    MONGODB_URI: '',
     PLAYGROUND: true,
     GOOGLE_CLIENT_ID: process.env.GOOGLE_CLIENT_ID,
     GOOGLE_CLIENT_SECRET: process.env.GOOGLE_CLIENT_SECRET,
@@ -34,7 +34,7 @@ const config = {
   default: {
     APP_PORT: process.env.APP_PORT,
     APP_SECRET: process.env.APP_SECRET,
-    MONGO_URL: 'mongodb://localhost/tour',
+    MONGODB_URI: 'mongodb://localhost/tour',
     PLAYGROUND: true,
     GOOGLE_CLIENT_ID: process.env.GOOGLE_CLIENT_ID,
     GOOGLE_CLIENT_SECRET: process.env.GOOGLE_CLIENT_SECRET,

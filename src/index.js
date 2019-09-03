@@ -24,7 +24,7 @@ const PORT = process.env.PORT || ENV_VAR.APP_PORT;
     });
     server.applyMiddleware({ app });
 
-    await mongoose.connect(ENV_VAR.MONGO_URL, { useNewUrlParser: true });
+    await mongoose.connect(ENV_VAR.MONGODB_URI, { useNewUrlParser: true });
 
     // eslint-disable-next-line no-console
     app.listen({ port: PORT }, () => console.log(`🚀 Server ready at http://localhost:${PORT}${server.graphqlPath}`));
