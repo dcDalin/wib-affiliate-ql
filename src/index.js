@@ -16,11 +16,15 @@ const PORT = process.env.PORT || ENV_VAR.APP_PORT;
     app.disable('x-powered-by');
 
     const server = new ApolloServer({
+      cors: {
+        origin: '*',
+        credentials: true,
+      },
       typeDefs,
       resolvers,
       context: ({ req }) => ({ req }),
       introspection: true,
-      playground: true,
+      playground: process.env.NODE_ENV === 'development',
     });
     server.applyMiddleware({ app });
 
