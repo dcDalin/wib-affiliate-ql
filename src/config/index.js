@@ -23,6 +23,14 @@ const config = {
     GOOGLE_CLIENT_ID: process.env.GOOGLE_CLIENT_ID,
     GOOGLE_CLIENT_SECRET: process.env.GOOGLE_CLIENT_SECRET,
   },
+  testing: {
+    APP_PORT: process.env.APP_PORT,
+    APP_SECRET: process.env.APP_SECRET,
+    MONGO_URL: '',
+    PLAYGROUND: true,
+    GOOGLE_CLIENT_ID: process.env.GOOGLE_CLIENT_ID,
+    GOOGLE_CLIENT_SECRET: process.env.GOOGLE_CLIENT_SECRET,
+  },
   default: {
     APP_PORT: process.env.APP_PORT,
     APP_SECRET: process.env.APP_SECRET,
