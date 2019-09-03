@@ -1,3 +1,4 @@
+import { AuthenticationError } from 'apollo-server-express';
 import User from '../../../../models/user';
 import { generateToken } from '../../utils/generateToken';
 import authenticateGoogle from '../../utils/passport';
@@ -32,9 +33,17 @@ export default {
         if (info) {
           switch (info.code) {
             case 'ETIMEDOUT':
-              return new Error('Failed to reach Google: Try Again');
+              throw new AuthenticationError('Failed to reach Google: Try again later...', {
+                errors: {
+                  auth: 'Failed to reach Google: Try again later...',
+                },
+              });
             default:
-              return new Error('something went wrong');
+              throw new AuthenticationError('something went wrong', {
+                errors: {
+                  auth: 'something went wrong',
+                },
+              });
           }
         }
         return Error('server error');

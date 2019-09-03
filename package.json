@@ -12,7 +12,7 @@
     "format": "prettier-eslint 'server/**/*.{js,json}' --write"
   },
   "lint-staged": {
-    "**/*.js": [
+    "src/**/*.js": [
       "eslint --fix",
       "prettier-eslint --write",
       "git add"
@@ -30,6 +30,7 @@
     "@babel/cli": "^7.5.5",
     "@babel/core": "^7.5.5",
     "@babel/node": "^7.5.5",
+    "@babel/plugin-transform-runtime": "^7.5.5",
     "@babel/preset-env": "^7.5.5",
     "eslint": "^6.2.1",
     "eslint-config-airbnb-base": "^14.0.0",
@@ -41,6 +42,7 @@
     "prettier-eslint-cli": "^5.0.0"
   },
   "dependencies": {
+    "@babel/runtime": "^7.5.5",
     "apollo-server-express": "^2.9.0",
     "bcryptjs": "^2.4.3",
     "dotenv": "^8.1.0",
