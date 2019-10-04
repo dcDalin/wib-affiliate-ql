@@ -4,6 +4,7 @@ import { UserInputError } from 'apollo-server-express';
 import bcrypt from 'bcryptjs';
 import User from '../../../../models/user';
 import { generateToken } from '../../utils/generateToken';
+import validateSignup from './validateSignup';
 
 export default {
   Mutation: {
@@ -11,14 +12,16 @@ export default {
       _,
       {
         userSignUpInput: {
-          // eslint-disable-next-line no-unused-vars
-          username,
-          emailAddress,
-          password,
-          confirmPassword,
+          username, emailAddress, password, confirmPassword,
         },
       },
     ) {
+      // Validate user input
+      const { valid, errors } = validateSignup(username, emailAddress, password, confirmPassword);
+      if (!valid) {
+        throw new UserInputError('Errors', { errors });
+      }
+
       // Make sure username doesn't exist
       const userUsername = await User.findOne({ username });
       if (userUsername) {
