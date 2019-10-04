@@ -24,7 +24,7 @@ const PORT = process.env.PORT || ENV_VAR.APP_PORT;
       resolvers,
       context: ({ req }) => ({ req }),
       introspection: true,
-      playground: process.env.NODE_ENV === 'development',
+      playground: process.env.NODE_ENV === 'development' || 'staging',
     });
     server.applyMiddleware({ app });
 
