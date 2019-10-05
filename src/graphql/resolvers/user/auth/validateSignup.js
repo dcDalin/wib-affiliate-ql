@@ -4,40 +4,30 @@ const validateSignup = (username, emailAddress, password, confirmPassword) => {
   const errors = {};
 
   // Username validations
+  const regEx = /^[\w-_.]*$/;
+  const userUsername = User.findOne({ username });
+
   if (username.trim() === '') {
     errors.username = 'Username is required';
   } else if (username.trim().length < 3) {
     errors.username = 'Username must be at least 3 characters long';
   } else if (username.trim().length > 10) {
     errors.username = 'Username should be less than 10 character';
-  } else {
-    // Letters, numbers and underscore
-    const regEx = /^[\w-_.]*$/;
-    if (!username.trim().match(regEx)) {
-      errors.username = 'Invalid username';
-    } else {
-      // Make sure username doesn't exist
-      const userUsername = User.findOne({ username });
-      if (userUsername) {
-        errors.username = 'This username is taken';
-      }
-    }
+  } else if (!username.trim().match(regEx)) {
+    errors.username = 'Invalid username';
+  } else if (userUsername) {
+    errors.username = 'This username is taken';
   }
 
   // Phone number validations
+  const emailRegEx = /\S+@\S+\.\S+/;
+  const userEmail = User.findOne({ 'email.emailAddress': emailAddress });
   if (emailAddress.trim() === '') {
     errors.emailAddress = 'Email is required';
-  } else {
-    const emailRegEx = /\S+@\S+\.\S+/;
-    if (!emailAddress.trim().match(emailRegEx)) {
-      errors.emailAddress = 'Invalid Email Address';
-    } else {
-      // Make sure email doesn't exist
-      const userEmail = User.findOne({ 'email.emailAddress': emailAddress });
-      if (userEmail) {
-        errors.emailAddress = 'Email already exists';
-      }
-    }
+  } else if (!emailAddress.trim().match(emailRegEx)) {
+    errors.emailAddress = 'Invalid Email Address';
+  } else if (userEmail) {
+    errors.emailAddress = 'Email already exists';
   }
 
   // Password validations
