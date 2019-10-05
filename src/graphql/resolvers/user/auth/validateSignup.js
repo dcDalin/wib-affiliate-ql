@@ -50,7 +50,9 @@ const validateSignup = (username, emailAddress, password, confirmPassword) => {
   }
 
   // Confirm password
-  if (password !== confirmPassword) {
+  if (confirmPassword.trim() === '') {
+    errors.confirmPassword = 'Retype your password';
+  } else if (password !== confirmPassword) {
     errors.confirmPassword = 'Passwords do not match';
   }
 
