@@ -22,26 +22,6 @@ export default {
         throw new UserInputError('Errors', { errors });
       }
 
-      // Make sure username doesn't exist
-      const userUsername = await User.findOne({ username });
-      if (userUsername) {
-        throw new UserInputError('Username is taken', {
-          errors: {
-            username: 'This username is taken',
-          },
-        });
-      }
-
-      // Make sure email doesn't exist
-      const userEmail = await User.findOne({ 'email.emailAddress': emailAddress });
-      if (userEmail) {
-        throw new UserInputError('Email exists', {
-          errors: {
-            username: 'Email already exists',
-          },
-        });
-      }
-
       // Hash the password
       const hashedPassword = await bcrypt.hash(password, 12);
 

@@ -21,6 +21,8 @@ var _user = _interopRequireDefault(require("../../../../models/user"));
 
 var _generateToken = require("../../utils/generateToken");
 
+var _validateSignup2 = _interopRequireDefault(require("./validateSignup"));
+
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
 
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(source, true).forEach(function (key) { (0, _defineProperty2["default"])(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(source).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
@@ -31,23 +33,36 @@ var _default = {
       var _userSignUp = (0, _asyncToGenerator2["default"])(
       /*#__PURE__*/
       _regenerator["default"].mark(function _callee(_, _ref) {
-        var _ref$userSignUpInput, username, emailAddress, password, confirmPassword, userUsername, userEmail, hashedPassword, newUser, res, token;
+        var _ref$userSignUpInput, username, emailAddress, password, confirmPassword, _validateSignup, valid, errors, userUsername, userEmail, hashedPassword, newUser, res, token;
 
         return _regenerator["default"].wrap(function _callee$(_context) {
           while (1) {
             switch (_context.prev = _context.next) {
               case 0:
                 _ref$userSignUpInput = _ref.userSignUpInput, username = _ref$userSignUpInput.username, emailAddress = _ref$userSignUpInput.emailAddress, password = _ref$userSignUpInput.password, confirmPassword = _ref$userSignUpInput.confirmPassword;
-                _context.next = 3;
+                // Validate user input
+                _validateSignup = (0, _validateSignup2["default"])(username, emailAddress, password, confirmPassword), valid = _validateSignup.valid, errors = _validateSignup.errors;
+
+                if (valid) {
+                  _context.next = 4;
+                  break;
+                }
+
+                throw new _apolloServerExpress.UserInputError('Errors', {
+                  errors: errors
+                });
+
+              case 4:
+                _context.next = 6;
                 return _user["default"].findOne({
                   username: username
                 });
 
-              case 3:
+              case 6:
                 userUsername = _context.sent;
 
                 if (!userUsername) {
-                  _context.next = 6;
+                  _context.next = 9;
                   break;
                 }
 
@@ -57,17 +72,17 @@ var _default = {
                   }
                 });
 
-              case 6:
-                _context.next = 8;
+              case 9:
+                _context.next = 11;
                 return _user["default"].findOne({
                   'email.emailAddress': emailAddress
                 });
 
-              case 8:
+              case 11:
                 userEmail = _context.sent;
 
                 if (!userEmail) {
-                  _context.next = 11;
+                  _context.next = 14;
                   break;
                 }
 
@@ -77,11 +92,11 @@ var _default = {
                   }
                 });
 
-              case 11:
-                _context.next = 13;
+              case 14:
+                _context.next = 16;
                 return _bcryptjs["default"].hash(password, 12);
 
-              case 13:
+              case 16:
                 hashedPassword = _context.sent;
                 newUser = new _user["default"]({
                   username: username,
@@ -91,10 +106,10 @@ var _default = {
                   password: hashedPassword
                 }); // Save to DB
 
-                _context.next = 17;
+                _context.next = 20;
                 return newUser.save();
 
-              case 17:
+              case 20:
                 res = _context.sent;
                 // Generate token
                 token = (0, _generateToken.generateToken)(res);
@@ -103,7 +118,7 @@ var _default = {
                   token: token
                 }));
 
-              case 20:
+              case 23:
               case "end":
                 return _context.stop();
             }

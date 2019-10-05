@@ -1,3 +1,5 @@
+import User from '../../../../models/user';
+
 const validateSignup = (username, emailAddress, password, confirmPassword) => {
   const errors = {};
 
@@ -13,6 +15,12 @@ const validateSignup = (username, emailAddress, password, confirmPassword) => {
     const regEx = /^[\w-_.]*$/;
     if (!username.trim().match(regEx)) {
       errors.username = 'Invalid username';
+    } else {
+      // Make sure username doesn't exist
+      const userUsername = User.findOne({ username });
+      if (userUsername) {
+        errors.username = 'This username is taken';
+      }
     }
   }
 
@@ -23,6 +31,12 @@ const validateSignup = (username, emailAddress, password, confirmPassword) => {
     const emailRegEx = /\S+@\S+\.\S+/;
     if (!emailAddress.trim().match(emailRegEx)) {
       errors.emailAddress = 'Invalid Email Address';
+    } else {
+      // Make sure email doesn't exist
+      const userEmail = User.findOne({ 'email.emailAddress': emailAddress });
+      if (userEmail) {
+        errors.emailAddress = 'Email already exists';
+      }
     }
   }
 

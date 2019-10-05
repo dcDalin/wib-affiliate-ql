@@ -46,7 +46,7 @@ _regenerator["default"].mark(function _callee() {
               };
             },
             introspection: true,
-            playground: process.env.NODE_ENV === 'development'
+            playground: process.env.NODE_ENV === 'development' || 'staging'
           });
           server.applyMiddleware({
             app: app
