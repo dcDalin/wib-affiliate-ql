@@ -8,5 +8,6 @@ export default {
   Mutation: {
     ...Auth.userSignUp.Mutation,
     ...Auth.authGoogle.Mutation,
+    ...Auth.userLogin.Mutation,
   },
 };

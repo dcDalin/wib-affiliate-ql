@@ -7,6 +7,7 @@ export default gql`
 
   extend type Mutation {
     userSignUp(userSignUpInput: UserSignUpInput): User!
+    userLogin(email: String!, password: String!): User!
     authGoogle(input: AuthInput!): AuthResponse
   }
 
