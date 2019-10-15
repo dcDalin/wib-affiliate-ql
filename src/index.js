@@ -4,6 +4,7 @@ import mongoose from 'mongoose';
 import config from './config';
 import typeDefs from './graphql/typeDefs';
 import resolvers from './graphql/resolvers';
+import schemaDirectives from './graphql/directives';
 
 const ENV_VAR = config.get(process.env.NODE_ENV);
 
@@ -22,6 +23,7 @@ const PORT = process.env.PORT || ENV_VAR.APP_PORT;
       },
       typeDefs,
       resolvers,
+      schemaDirectives,
       context: ({ req }) => ({ req }),
       introspection: true,
       playground: process.env.NODE_ENV === 'development' || 'staging',
