@@ -47,8 +47,10 @@
     "bcryptjs": "^2.4.3",
     "dotenv": "^8.1.0",
     "express": "^4.17.1",
+    "graphql": "^14.5.8",
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^5.6.10",
+    "nodemailer": "^6.3.1",
     "passport": "^0.4.0",
     "passport-google-token": "^0.1.2"
   }
