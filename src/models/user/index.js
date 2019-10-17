@@ -20,6 +20,10 @@ const userSchema = new Schema(
       isVerified: { type: Boolean, default: false },
     },
     password: String,
+    roles: {
+      type: [{ type: String, enum: ['user', 'publisher', 'affiliate'] }],
+      default: 'user',
+    },
     social: {
       googleProvider: {
         id: String,
