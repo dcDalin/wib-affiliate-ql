@@ -6,7 +6,6 @@ const ENV_VAR = config.get(process.env.NODE_ENV);
 const { APP_SECRET } = ENV_VAR;
 
 const checkAuth = (context) => {
-  console.log('******** context is: ', context.req);
   const authHeader = context.req.headers.authorization;
   if (authHeader) {
     const token = authHeader.split('Bearer ')[1];

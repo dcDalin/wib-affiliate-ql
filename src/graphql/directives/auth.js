@@ -7,7 +7,7 @@ class AuthDirective extends SchemaDirectiveVisitor {
   visitFieldDefinition(field) {
     const { resolve = defaultFieldResolver } = field;
     // eslint-disable-next-line no-param-reassign
-    field.resolve = function (...args) {
+    field.resolve = (...args) => {
       const [, , context] = args;
       checkAuth(context);
 
