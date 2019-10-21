@@ -12,6 +12,7 @@ const checkAuth = (context) => {
     if (token) {
       try {
         const user = jwt.verify(token, APP_SECRET);
+        console.log('******** user from jwt is: ', user);
         return user;
       } catch (err) {
         throw new AuthenticationError('Invalid/Expired token');
