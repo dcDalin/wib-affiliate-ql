@@ -3,6 +3,7 @@ import { gql } from 'apollo-server-express';
 export default gql`
   extend type Query {
     users: [User] @auth
+    me: User @auth
   }
 
   extend type Mutation {
@@ -17,6 +18,7 @@ export default gql`
     email: Email!
     phone: Phone
     token: String
+    roles: [String!]
   }
 
   type Email {
