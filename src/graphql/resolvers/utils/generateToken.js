@@ -7,6 +7,7 @@ const generateToken = (user) => jwt.sign(
   {
     id: user.id,
     username: user.username,
+    roles: user.roles,
   },
   ENV_VAR.APP_SECRET,
   { expiresIn: '1h' },
