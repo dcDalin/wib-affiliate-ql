@@ -22,7 +22,11 @@ const tourSchema = new Schema(
     tags: {
       type: [{ type: String }],
     },
-    createdBy: String,
+    createdBy: {
+      type: Schema.Types.ObjectId,
+      ref: 'users',
+    },
+    approved: String,
   },
   {
     timestamps: true,
